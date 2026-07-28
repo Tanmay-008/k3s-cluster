@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: room-service-deployment
   labels:
-    app: room-service
+    app: room-srvice
 spec:
   replicas: 2
   selector:

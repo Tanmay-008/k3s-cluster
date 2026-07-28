@@ -4,4 +4,4 @@ metadata:
   name: room-config
 data:
   mongodb-url: ""
-  room-service-port: ""
+  room-service-port:
