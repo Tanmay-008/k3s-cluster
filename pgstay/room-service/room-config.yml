@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: room-config
+data:
+  mongodb-url: ""
+  room-service-port: ""
