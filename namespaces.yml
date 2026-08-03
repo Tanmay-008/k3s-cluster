@@ -2,3 +2,11 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: pgstay
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: argocd
+  labels:
+    name: argocd
