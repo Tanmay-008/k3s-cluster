@@ -1,0 +1,19 @@
+redis-ha:
+  enabled: false
+
+server:
+  extraArgs:
+    - --insecure
+  
+  service:
+    type: NodePort
+    nodePortHttp: 30070
+
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    annotations:
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+      nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+    hosts:
+      - argocd.tanmayshirbhayye.com
