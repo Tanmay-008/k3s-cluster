@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application                 
 metadata:
   name: room-service           
-  namespace: pgstay                
+  namespace: argocd                
 spec:
   project: pgstay                
   source:
@@ -19,4 +19,3 @@ spec:
     syncOptions: 
       - ApplyOutOfSyncOnly=true 
       - CreateNamespace=true
-    
