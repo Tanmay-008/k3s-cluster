@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: pgstay
+  namespace: argocd
+spec:
+  sourceRepos:
+    - https://github.com/Tanmay-008/k3s-cluster.git
+  destinations:
+    - namespace: pgstay
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
