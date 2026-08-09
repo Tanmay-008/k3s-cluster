@@ -25,7 +25,7 @@ spec:
             - mountPath: /custom-tools
               name: custom-tools
       containers:
-        - name: argocd-repo-server
+        - name: repo-server
           env:
             - name: SOPS_AGE_KEY_FILE
               value: /sops-age/keys.txt
