@@ -1,0 +1,10 @@
+*-secret.yml
+*-secret.yaml
+!*-secret.enc.yml
+
+keys.txt
+*.age
+
+.DS_Store
+Thumbs.db
+.vscode/
