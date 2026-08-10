@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: argocd-repo-server
+  namespace: argocd
+spec:
+  template:
+    spec:
+      volumes:
+        - name: ksops-binaries
+          emptyDir: {}
+        - name: sops-age
+          secret:
+            secretName: sops-age
+
+      initContainers:
+        - name: install-ksops
+          image: viaductoss/ksops:v4.1.1
+          command: ["/bin/sh", "-c"]
+          args:
+            - echo "Installing KSOPS..."; cp ksops /ksops-binaries/; cp $GOPATH/bin/kustomize /ksops-binaries/; echo "Done.";
+          volumeMounts:
+            - mountPath: /ksops-binaries
+              name: ksops-binaries
+
+      containers:
+        - name: argocd-repo-server
+          env:
+            - name: XDG_CONFIG_HOME
+              value: /.config
+            - name: SOPS_AGE_KEY_FILE
+              value: /.config/sops/age/keys.txt
+          volumeMounts:
+            - mountPath: /usr/local/bin/kustomize
+              name: ksops-binaries  
+              subPath: kustomize
+            - mountPath: /usr/local/bin/ksops
+              name: ksops-binaries  
+              subPath: ksops
+            - mountPath: /.config/sops/age/keys.txt
+              name: sops-age
+              subPath: keys.txt  
+              readOnly: true
