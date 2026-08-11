@@ -18,8 +18,12 @@ spec:
           image: viaductoss/ksops:v4.1.1
           command: ["/bin/sh", "-c"]
           args:
-            - echo "Installing KSOPS..."; cp ksops /ksops-binaries/; cp $GOPATH/bin/kustomize /ksops-binaries/; echo "Done.";
-          volumeMounts:
+            - |
+              echo "Setting up KSOPS plugin directory structure..."
+              mkdir -p /home/argocd/.config/kustomize/plugin/viaduct.ai/v1/ksops/
+              cp ksops /home/argocd/.config/kustomize/plugin/viaduct.ai/v1/ksops/ksops
+              chmod +x /home/argocd/.config/kustomize/plugin/viaduct.ai/v1/ksops/ksops
+              echo "KSOPS successfully placed at Kustomize plugin root."          volumeMounts:
             - mountPath: /ksops-binaries
               name: ksops-binaries
 
