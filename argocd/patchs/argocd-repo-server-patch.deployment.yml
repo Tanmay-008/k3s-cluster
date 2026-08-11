@@ -33,7 +33,7 @@ spec:
               mountPath: /custom-plugins
 
       containers:
-        - name: argocd-repo-server
+        - name: repo-server
           image: quay.io/argoproj/argocd:v3.4.6
           env:
             - name: XDG_CONFIG_HOME
