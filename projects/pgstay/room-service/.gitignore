@@ -1,6 +1,5 @@
 *-secret.yml
 *-secret.yaml
-!*-secret.enc.yml
 
 keys.txt
 *.age
