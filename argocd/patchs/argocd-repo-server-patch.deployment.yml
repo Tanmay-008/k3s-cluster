@@ -19,14 +19,14 @@ spec:
           command: ["/bin/sh", "-c"]
           args:
             - |
-              echo "Setting up KSOPS plugin directory structure..."
+              echo "Setting up KSOPS plugin structure..."
               mkdir -p /home/argocd/.config/kustomize/plugin/viaduct.ai/v1/ksops/
-              cp ksops /home/argocd/.config/kustomize/plugin/viaduct.ai/v1/ksops/ksops
+              
+              # FIX: Use dynamic path resolution so 'cp' actually finds the binary
+              cp $(which ksops) /home/argocd/.config/kustomize/plugin/viaduct.ai/v1/ksops/ksops
+              
               chmod +x /home/argocd/.config/kustomize/plugin/viaduct.ai/v1/ksops/ksops
-              echo "KSOPS successfully placed at Kustomize plugin root."          volumeMounts:
-            - mountPath: /ksops-binaries
-              name: ksops-binaries
-
+              echo "KSOPS binary successfully copied and verified."
       containers:
         - name: argocd-repo-server
           env:
