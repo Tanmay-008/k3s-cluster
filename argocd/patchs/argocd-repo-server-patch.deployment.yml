@@ -29,6 +29,7 @@ spec:
               echo "KSOPS binary successfully copied and verified."
       containers:
         - name: argocd-repo-server
+          image: quay.io/argoproj/argocd:v3.4.6
           env:
             - name: XDG_CONFIG_HOME
               value: /.config
