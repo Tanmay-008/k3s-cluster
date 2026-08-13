@@ -15,7 +15,7 @@ spec:
 
       initContainers:
         - name: install-ksops
-          image: viaductoss/ksops:v4.3.1
+          image: viaductoss/ksops:v4.5.1
           command: ["/bin/sh", "-c"]
           args:
             - |
@@ -39,9 +39,16 @@ spec:
               value: /home/argocd/.config
             - name: SOPS_AGE_KEY_FILE
               value: /home/argocd/.config/sops/age/keys.txt
-          volumeMounts:
             - name: ksops-binaries
-              mountPath: /custom-tools
+              mountPath: /usr/local/bin/ksops
+              subPath: ksops
+              
+            # 2. Legacy Generator ke liye: Kustomize plugin directory me mount (Bulletproof)
+            - name: ksops-binaries
+              mountPath: /home/argocd/.config/kustomize/plugin/viaduct.ai/v1/ksops/ksops
+              subPath: ksops
+              
+            # 3. Tumhari SOPS Age Key
             - name: sops-age
               mountPath: /home/argocd/.config/sops/age/keys.txt
               subPath: keys.txt
