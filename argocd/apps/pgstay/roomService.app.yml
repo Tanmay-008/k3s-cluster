@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/Tanmay-008/k3s-cluster.git   
     targetRevision: main           
-    path: apps/pgstay/room-service  
+    path: projects/pgstay/room-service  
   destination:
     server: https://kubernetes.default.svc 
     namespace: pgstay             
