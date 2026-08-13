@@ -36,6 +36,9 @@ spec:
               mountPath: /usr/local/bin/ksops
               subPath: ksops
             - name: ksops-binaries
+              mountPath: /usr/local/bin/kustomize   
+              subPath: kustomize                    
+            - name: ksops-binaries
               mountPath: /home/argocd/.config/kustomize/plugin/viaduct.ai/v1/ksops/ksops
               subPath: ksops
             - name: sops-age
