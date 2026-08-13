@@ -4,4 +4,4 @@ metadata:
   name: argocd-cm
   namespace: argocd
 data:
-  kustomize.buildOptions: "--enable-exec"
+  kustomize.buildOptions: "--enable-alpha-plugins --enable-exec"

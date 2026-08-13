@@ -7,7 +7,7 @@ spec:
   template:
     spec:
       volumes:
-        - name: kustomize-plugins
+        - name: ksops-binaries 
           emptyDir: {}
         - name: sops-age
           secret:
@@ -15,40 +15,34 @@ spec:
 
       initContainers:
         - name: install-ksops
-          image: viaductoss/ksops:v4.1.1
+          image: viaductoss/ksops:v4.3.1
           command: ["/bin/sh", "-c"]
           args:
             - |
               set -e
-              echo "Setting up KSOPS plugin structure..."
-              mkdir -p /custom-plugins/viaduct.ai/v1/ksops/
-              
-              if [ -f /ksops ]; then
-                cp /ksops /custom-plugins/viaduct.ai/v1/ksops/ksops
-              elif [ -f /usr/local/bin/ksops ]; then
-                cp /usr/local/bin/ksops /custom-plugins/viaduct.ai/v1/ksops/ksops
-              else
-                cp $(which ksops) /custom-plugins/viaduct.ai/v1/ksops/ksops
-              fi
-              
-              chmod +x /custom-plugins/viaduct.ai/v1/ksops/ksops
-              echo "KSOPS binary successfully copied!"
+              echo "Installing KSOPS binary..."
+              cp /ksops /custom-tools/ksops
+              chmod +x /custom-tools/ksops
+              chown 999:999 /custom-tools/ksops
+              echo "KSOPS binary installed successfully."
           volumeMounts:
-            - name: kustomize-plugins
-              mountPath: /custom-plugins
+            - name: ksops-binaries 
+              mountPath: /custom-tools
 
       containers:
         - name: repo-server
           image: quay.io/argoproj/argocd:v3.4.6
           env:
+            - name: PATH
+              value: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/custom-tools"
             - name: XDG_CONFIG_HOME
               value: /home/argocd/.config
             - name: SOPS_AGE_KEY_FILE
               value: /home/argocd/.config/sops/age/keys.txt
           volumeMounts:
-            - name: kustomize-plugins
-              mountPath: /home/argocd/.config/kustomize/plugin
+            - name: ksops-binaries
+              mountPath: /custom-tools
             - name: sops-age
               mountPath: /home/argocd/.config/sops/age/keys.txt
-              subPath: keys.txt  
+              subPath: keys.txt
               readOnly: true
