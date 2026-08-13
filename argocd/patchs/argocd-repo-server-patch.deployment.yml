@@ -17,16 +17,8 @@ spec:
         - name: install-ksops
           image: viaductoss/ksops:v4.5.1
           command: ["/usr/local/bin/ksops", "install", "--with-kustomize", "/custom-tools"]
-          args:
-            - |
-              set -e
-              echo "Installing KSOPS binary..."
-              cp /ksops /custom-tools/ksops
-              chmod +x /custom-tools/ksops
-              chown 999:999 /custom-tools/ksops
-              echo "KSOPS binary installed successfully."
           volumeMounts:
-            - name: ksops-binaries 
+            - name: ksops-binaries
               mountPath: /custom-tools
 
       containers:
