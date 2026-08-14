@@ -23,6 +23,6 @@ spec:
 
         envFrom: 
         - configMapRef:
-            name: roomService-config
+            name: roomservice-config
         - secretRef:
-            name: roomService-secret
+            name: roomservice-secret
