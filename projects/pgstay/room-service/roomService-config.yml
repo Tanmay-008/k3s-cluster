@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: roomService-config
+  name: roomservice-config
   namespace: pgstay
 data:
   PORT: "5000"
