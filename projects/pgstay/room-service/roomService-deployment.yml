@@ -22,7 +22,7 @@ spec:
         - containerPort: 5000
 
         envFrom: 
-        # - configMapRef:
-        #     name: roomservice-config
-        # - secretRef:
+        - configMapRef:
+            name: roomservice-config
+        - secretRef:
             name: roomservice-secret
