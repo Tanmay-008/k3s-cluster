@@ -1,0 +1,8 @@
+installCRDs: true
+
+prometheus:
+  servicemonitor:
+    enabled: true
+
+webhook:
+  timeoutSeconds: 30
