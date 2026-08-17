@@ -1,0 +1,37 @@
+replicaCount: 1
+
+service:
+  type: LoadBalancer
+  ports:
+    http: 80
+  targetPorts:
+    http: 8080
+
+# 3. Middleware Routing Logic (Sabse important part)
+# Yahan tu bata raha hai ki request kahan bhejni hai.
+serverBlock: |-
+  server {
+    listen 8080;
+    server_name localhost;
+
+    location /rooms {
+      proxy_pass http://room-service.pgstay.svc.cluster.local:8080;
+      proxy_set_header Host $host;
+      proxy_set_header X-Real-IP $remote_addr;
+    }
+
+    location /search {
+      proxy_pass http://dev-search.dev-search.svc.cluster.local:8080;
+      proxy_set_header Host $host;
+      proxy_set_header X-Real-IP $remote_addr;
+    }
+  }
+
+# 4. Resource Management (Production ke liye limits zaroori hain)
+resources:
+  limits:
+    cpu: 200m
+    memory: 256Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
