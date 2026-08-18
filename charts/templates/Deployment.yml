@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "application-chart.fullname" . }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "application-chart.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "application-chart.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "application-chart.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ include "application-chart.fullname" . }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.service.targetPort }}
+              name: http
+          
+          {{- if .Values.probes.enabled }}
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.probes.healthPath }}
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.probes.readinessPath }}
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          {{- end }}
+
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
