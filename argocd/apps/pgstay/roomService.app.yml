@@ -9,6 +9,10 @@ spec:
     repoURL: https://github.com/Tanmay-008/k3s-cluster.git   
     targetRevision: main           
     path: projects/pgstay/room-service  
+    helm:                                 
+     valueFiles:
+        - values.yml
+        - secrets://roomService-secret-encrypted.yml
   destination:
     server: https://kubernetes.default.svc 
     namespace: pgstay             
