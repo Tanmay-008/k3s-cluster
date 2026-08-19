@@ -12,7 +12,7 @@ Standard labels
 {{- define "k3s-apps.labels" -}}
 helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
-{{- include "k3s-apps.selectorLabels" . }}
+{{ include "k3s-apps.selectorLabels" . }}
 {{- end }}
 
 
