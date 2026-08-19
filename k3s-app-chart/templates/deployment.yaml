@@ -48,16 +48,6 @@ spec:
 
           {{- end }}
 
-          {{- if .Values.env }}
-
-          env:
-            {{- range $key, $value := .Values.env }}
-            - name: {{ $key }}
-              value: {{ $value | quote }}
-            {{- end }}
-
-          {{- end }}
-
           {{- if .Values.resources }}
 
           resources:
@@ -65,11 +55,6 @@ spec:
 
           {{- end }}
 
-          {{- if .Values.secret }}
-          env:
-            {{- range $key, $value := .Values.secret }}
-            - name: {{ $key }}
-              value: {{ $value | quote }}
-            {{- end }}
-          {{- end }}
-
+          envFrom:
+            - secretRef:
+                name: {{ include "k3s-apps.fullname" . }}-secret
