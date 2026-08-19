@@ -1,9 +1,9 @@
 replicaCount: 1
 
 image:
-  repository: ""
-  tag: ""
-  pullPolicy: ""
+  repository: nginx
+  tag: stable
+  pullPolicy: IfNotPresent
 
 service:
   type: ClusterIP
