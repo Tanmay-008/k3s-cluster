@@ -45,7 +45,7 @@ healthCheck:
   initialDelaySeconds: 10
   periodSeconds: 10
   readinessInitialDelaySeconds: 5
-  readinessPeriodSeconds: 10serviceAccount:
+  readinessPeriodSeconds: 10serviceAccount
   create: false
   annotations: {}
   automount: false
