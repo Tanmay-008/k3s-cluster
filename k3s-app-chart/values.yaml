@@ -39,16 +39,13 @@ secret:
 #   maxReplicas: 3
 #   targetCPUUtilizationPercentage: 80
 
-# healthcheck:
-#   livenessProbe:
-#     httpGet:
-#       path: /
-#       port: http
-#   readinessProbe:
-#     httpGet:
-#       path: /
-#       port: http
-serviceAccount:
+healthCheck:
+  enabled: false
+  path: /health
+  initialDelaySeconds: 10
+  periodSeconds: 10
+  readinessInitialDelaySeconds: 5
+  readinessPeriodSeconds: 10serviceAccount:
   create: false
   annotations: {}
   automount: false
