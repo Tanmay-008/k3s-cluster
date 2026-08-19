@@ -20,7 +20,7 @@ spec:
 
     spec:
       containers:
-        - name: {{ .Values.app.name | default .Chart.Name }}
+        - name: {{ .Chart.Name }}
 
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
