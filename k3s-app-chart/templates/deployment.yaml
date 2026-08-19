@@ -65,10 +65,11 @@ spec:
 
           {{- end }}
 
-          envFrom:
-            {{- range $key, $value := .Values.envFrom }}
+          {{- if .Values.secret }}
+          env:
+            {{- range $key, $value := .Values.secret }}
             - name: {{ $key }}
               value: {{ $value | quote }}
             {{- end }}
-
           {{- end }}
+
