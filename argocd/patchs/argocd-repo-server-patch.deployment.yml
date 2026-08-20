@@ -29,10 +29,14 @@ spec:
               curl -fsSL "https://github.com/getsops/sops/releases/download/v${SOPS_VERSION}/sops-v${SOPS_VERSION}.linux.amd64" -o /custom-tools/sops
               chmod +x /custom-tools/sops
               
-              # 2. Install helm-secrets plugin into helm-plugins dir
-              mkdir -p /helm-plugins/helm-secrets
+              # 2. Install helm-secrets as a wrapper directly into custom-tools
+              mkdir -p /helm-plugins
               curl -fsSL "https://github.com/jkroepke/helm-secrets/releases/download/v${HELM_SECRETS_VERSION}/helm-secrets.tar.gz" \
-                | tar -xz -C /helm-plugins/helm-secrets
+                | tar -xz -C /helm-plugins
+              
+              # Copy the wrapper to override helm command
+              cp /helm-plugins/helm-secrets/scripts/wrapper/helm.sh /custom-tools/helm
+              chmod +x /custom-tools/helm
           volumeMounts:
             - name: custom-tools
               mountPath: /custom-tools
