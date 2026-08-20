@@ -1,22 +1,13 @@
 replicaCount: 1
-
 image:
-  repository: tanmay678/room-service
-  tag: latest
-  pullPolicy: IfNotPresent
-
+    repository: tanmay678/pgstay-room-service
+    tag: latest
 service:
-  type: ClusterIP
-  port: 80
-  targetPort: 5000
+    port: 80
+targetPort: 5000
 
 healthCheck:
   enabled: false
-  path: /health
-  initialDelaySeconds: 10
-  periodSeconds: 10
-  readinessInitialDelaySeconds: 5
-  readinessPeriodSeconds: 10
 
 resources:
   limits:
@@ -25,3 +16,7 @@ resources:
   requests:
     cpu: 100m
     memory: 128Mi
+
+secrets:
+  enabled: true
+  

@@ -6,16 +6,13 @@ metadata:
 spec:
   project: pgstay   
   sources:
-   - repoURL: registry-1.docker.io/tanmay678
-     chart: k3s-apps-chart
-     targetRevision: 0.1.0
-     helm:
-       valueFiles:
-         - $values/projects/pgstay/room-service/values.yml
-         - secrets://$values/projects/pgstay/room-service/roomService-secret-encrypted.yml
    - repoURL: https://github.com/Tanmay-008/k3s-cluster.git
      targetRevision: main
-     ref: values 
+     path: projects/pgstay/room-service
+     helm:
+       valueFiles:
+         - values.yml
+         - secrets://roomService-secret-encrypted.yml
   destination:
     server: https://kubernetes.default.svc 
     namespace: pgstay             
