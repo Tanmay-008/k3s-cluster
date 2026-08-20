@@ -1,26 +1,10 @@
-k3s-apps-chart:
-  apiVersion: v2
-  name: k3s-apps-chart
-  version: 0.1.0
-  type: application
-  replicaCount: 1
-  image:
-      repository: tanmay678/pgstay-room-service
-      tag: latest
-  service:
-      port: 80
-  targetPort: 5000
-
-  healthCheck:
-    enabled: false
-
-  resources:
-    limits:
-      cpu: 500m
-      memory: 512Mi
-    requests:
-      cpu: 100m
-      memory: 128Mi
-
-  secrets:
-    enabled: true
+apiVersion: v2
+name: room-service
+description: A Helm chart for the room-service application
+type: application
+version: 1.0.0
+appVersion: "1.0.0"
+dependencies:
+  - name: k3s-apps-chart
+    version: 0.1.0
+    repository: oci://registry-1.docker.io/tanmay678
