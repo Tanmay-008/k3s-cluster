@@ -53,6 +53,8 @@ spec:
               value: /home/argocd/.local/share/helm/plugins
             - name: SOPS_AGE_KEY_FILE
               value: /home/argocd/.config/sops/age/keys.txt
+            - name: HELM_SECRETS_WRAPPER_ENABLED
+              value: "true"
           volumeMounts:
             - name: custom-tools
               mountPath: /custom-tools
