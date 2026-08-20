@@ -10,7 +10,9 @@ spec:
     - https://github.com/Tanmay-008/k3s-cluster.git
 
     - registry-1.docker.io/tanmay678/k3s-apps-chart
-
+    
+    - registry-1.docker.io/tanmay678
+    
   destinations:
     - namespace: pgstay
       server: https://kubernetes.default.svc
