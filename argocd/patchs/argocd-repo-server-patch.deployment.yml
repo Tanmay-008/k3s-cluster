@@ -21,18 +21,34 @@ spec:
           command: ["/bin/sh", "-c"]
           args:
             - |
+              set -e
               apk add --no-cache curl tar
               SOPS_VERSION=3.9.4
               HELM_SECRETS_VERSION=4.7.7
               
               # 1. Install sops into custom-tools
+              echo "==> Installing sops v${SOPS_VERSION}..."
               curl -fsSL "https://github.com/getsops/sops/releases/download/v${SOPS_VERSION}/sops-v${SOPS_VERSION}.linux.amd64" -o /custom-tools/sops
               chmod +x /custom-tools/sops
+              echo "==> sops installed successfully."
               
-              # 2. Install helm-secrets plugin cleanly into helm-plugins dir
-              mkdir -p /helm-plugins/secrets
-              curl -fsSL "https://github.com/jkroepke/helm-secrets/releases/download/v${HELM_SECRETS_VERSION}/helm-secrets.tar.gz" \
-                | tar -xz -C /helm-plugins/secrets
+              # 2. Install helm-secrets plugin
+              echo "==> Installing helm-secrets v${HELM_SECRETS_VERSION}..."
+              mkdir -p /helm-plugins/helm-secrets
+              curl -fsSL "https://github.com/jkroepke/helm-secrets/releases/download/v${HELM_SECRETS_VERSION}/helm-secrets.tar.gz" -o /tmp/helm-secrets.tar.gz
+              tar -xzf /tmp/helm-secrets.tar.gz -C /helm-plugins/helm-secrets
+              rm /tmp/helm-secrets.tar.gz
+              chmod -R 755 /helm-plugins/
+              
+              echo "==> Verifying plugin installation:"
+              ls -la /helm-plugins/helm-secrets/
+              
+              if [ -f /helm-plugins/helm-secrets/plugin.yaml ]; then
+                echo "==> helm-secrets plugin.yaml FOUND. Installation successful!"
+              else
+                echo "==> ERROR: plugin.yaml NOT FOUND! Installation failed."
+                exit 1
+              fi
           volumeMounts:
             - name: custom-tools
               mountPath: /custom-tools
@@ -49,8 +65,8 @@ spec:
               value: /home/argocd/.local/share/helm/plugins
             - name: SOPS_AGE_KEY_FILE
               value: /home/argocd/.config/sops/age/keys.txt
-            - name: HELM_SECRETS_WRAPPER_ENABLED
-              value: "true"
+            - name: HELM_SECRETS_SOPS_PATH
+              value: /custom-tools/sops
           volumeMounts:
             - name: custom-tools
               mountPath: /custom-tools
