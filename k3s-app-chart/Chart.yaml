@@ -1,5 +1,5 @@
 apiVersion: v2
-name: k3s-apps
+name: k3s-apps-chart
 description: A reusable Helm chart for deploying applications on a K3s cluster
 type: application
 
