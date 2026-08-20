@@ -6,7 +6,7 @@ metadata:
 spec:
   project: pgstay   
   sources:
-   - repoURL: registry-1.docker.io/tanmay678/k3s-apps-chart
+   - repoURL: registry-1.docker.io/tanmay678
      chart: k3s-apps-chart
      targetRevision: 0.1.0
      helm:
