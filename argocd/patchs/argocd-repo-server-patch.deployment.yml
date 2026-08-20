@@ -36,7 +36,7 @@ spec:
               echo "==> Installing helm-secrets v${HELM_SECRETS_VERSION}..."
               mkdir -p /helm-plugins/helm-secrets
               curl -fsSL "https://github.com/jkroepke/helm-secrets/releases/download/v${HELM_SECRETS_VERSION}/helm-secrets.tar.gz" -o /tmp/helm-secrets.tar.gz
-              tar -xzf /tmp/helm-secrets.tar.gz -C /helm-plugins/helm-secrets
+              tar -xzf /tmp/helm-secrets.tar.gz -C /helm-plugins/helm-secrets --strip-components=1
               rm /tmp/helm-secrets.tar.gz
               chmod -R 755 /helm-plugins/
               
