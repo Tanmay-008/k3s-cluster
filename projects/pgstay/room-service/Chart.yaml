@@ -1,4 +1,8 @@
 k3s-apps-chart:
+  apiVersion: v2
+  name: k3s-apps-chart
+  version: 0.1.0
+  type: application
   replicaCount: 1
   image:
       repository: tanmay678/pgstay-room-service
