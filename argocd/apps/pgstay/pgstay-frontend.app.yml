@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1   
+kind: Application                 
+metadata:
+  name: room-service           
+  namespace: argocd                
+spec:
+  project: pgstay   
+  sources:
+   - repoURL: https://github.com/Tanmay-008/k3s-cluster.git
+     targetRevision: main
+     path: projects/pgstay/room-service
+     helm:
+       valueFiles:
+         - values.yml
+         - secrets://roomService-secret-encrypted.yml
+  destination:
+    server: https://kubernetes.default.svc 
+    namespace: pgstay             
+  syncPolicy:                      
+    automated:                     
+      prune: true                  
+      selfHeal: true  
+    syncOptions: 
+      - ApplyOutOfSyncOnly=true 
+      - CreateNamespace=true
