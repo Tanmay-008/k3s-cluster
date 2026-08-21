@@ -20,3 +20,5 @@ k3s-apps-chart:
 
   secrets:
     enabled: true
+
+  secretName: roomservice-secret
