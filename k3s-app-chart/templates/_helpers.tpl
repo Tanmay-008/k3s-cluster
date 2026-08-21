@@ -2,7 +2,7 @@
 Full name
 */}}
 {{- define "k3s-apps.fullname" -}}
-k3s-apps
+{{ .Values.appName | default .Release.Name }}
 {{- end }}
 
 
@@ -20,6 +20,6 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 Selector labels
 */}}
 {{- define "k3s-apps.selectorLabels" -}}
-app.kubernetes.io/name: k3s-apps
+app.kubernetes.io/name: {{ .Values.appName | default .Release.Name }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}

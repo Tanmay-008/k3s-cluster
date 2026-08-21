@@ -1,60 +1,45 @@
 apiVersion: apps/v1
 kind: Deployment
-
 metadata:
-  name: {{ include "k3s-apps.fullname" . }}
+  name: {{ .Values.appName | default .Release.Name }}
   labels:
     {{- include "k3s-apps.labels" . | nindent 4 }}
-
 spec:
   replicas: {{ .Values.replicaCount }}
-
   selector:
     matchLabels:
       {{- include "k3s-apps.selectorLabels" . | nindent 6 }}
-
   template:
     metadata:
       labels:
         {{- include "k3s-apps.selectorLabels" . | nindent 8 }}
-
     spec:
       containers:
-        - name: {{ .Chart.Name }}
-
+        - name: {{ .Values.appName | default .Release.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-
           ports:
             - name: http
               containerPort: {{ .Values.service.targetPort }}
               protocol: TCP
-
           {{- if .Values.healthCheck.enabled }}
-
           livenessProbe:
             httpGet:
               path: {{ .Values.healthCheck.path }}
               port: {{ .Values.service.targetPort }}
             initialDelaySeconds: {{ .Values.healthCheck.initialDelaySeconds }}
             periodSeconds: {{ .Values.healthCheck.periodSeconds }}
-
           readinessProbe:
             httpGet:
               path: {{ .Values.healthCheck.path }}
               port: {{ .Values.service.targetPort }}
             initialDelaySeconds: {{ .Values.healthCheck.readinessInitialDelaySeconds }}
             periodSeconds: {{ .Values.healthCheck.readinessPeriodSeconds }}
-
           {{- end }}
-
           {{- if .Values.resources }}
-
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-
           {{- end }}
-
           envFrom:
             - secretRef:
                 name: {{ .Values.secretName | default (printf "%s-secret" .Release.Name) }}

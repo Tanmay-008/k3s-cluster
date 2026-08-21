@@ -1,8 +1,7 @@
-# templates/service.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "k3s-apps.fullname" . }}
+  name: {{ .Values.appName | default .Release.Name }}
   labels:
     {{- include "k3s-apps.labels" . | nindent 4 }}
 spec:
