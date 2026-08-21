@@ -1,18 +1,18 @@
 apiVersion: argoproj.io/v1alpha1   
 kind: Application                 
 metadata:
-  name: room-service           
+  name: pgstay-frontend           
   namespace: argocd                
 spec:
   project: pgstay   
   sources:
    - repoURL: https://github.com/Tanmay-008/k3s-cluster.git
      targetRevision: main
-     path: projects/pgstay/room-service
+     path: projects/pgstay/frontend
      helm:
        valueFiles:
          - values.yml
-         - secrets://roomService-secret-encrypted.yml
+         - secrets://pgstay-frontend-secret-encrypted.yml
   destination:
     server: https://kubernetes.default.svc 
     namespace: pgstay             
