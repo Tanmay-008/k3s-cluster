@@ -1,0 +1,24 @@
+k3s-apps-chart:
+  replicaCount: 1
+  image:
+    repository: tanmay678/pgstay-frontend
+    tag: latest
+  service:
+    port: 80
+  targetPort: 3000
+
+  healthCheck:
+    enabled: false
+
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+
+  secrets:
+    enabled: true
+
+  secretName: pgstay-frontend-secret

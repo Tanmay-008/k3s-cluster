@@ -1,0 +1,9 @@
+*-secret.yml
+*-secret.yaml
+
+keys.txt
+*.age
+
+.DS_Store
+Thumbs.db
+.vscode/
