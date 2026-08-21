@@ -57,4 +57,4 @@ spec:
 
           envFrom:
             - secretRef:
-                name: {{ include "k3s-apps.fullname" . }}-secret
+                name: {{ .Values.secretName | default (printf "%s-secret" .Release.Name) }}
