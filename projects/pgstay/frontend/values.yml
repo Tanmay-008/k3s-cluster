@@ -1,4 +1,5 @@
 k3s-apps-chart:
+  appName: pgstay-frontend
   replicaCount: 1
   image:
     repository: tanmay678/pgstay-frontend
