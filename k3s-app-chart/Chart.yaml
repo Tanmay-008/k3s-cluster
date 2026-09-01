@@ -3,7 +3,7 @@ name: k3s-apps-chart
 description: A reusable Helm chart for deploying applications on a K3s cluster
 type: application
 
-version: 0.1.2
+version: 0.1.3
 appVersion: "1.0.0"
 
 maintainers:
