@@ -20,10 +20,25 @@ resources:
 
 ingress:
   enabled: false
-  className: nginx
-  host: example.local
-  path: /
-  pathType: Prefix
+  className: traefik
+  host: ""
+  annotations: {}
+  tls:
+    enabled: false
+    secretName: ""
+  paths: []
+
+certificate:
+  enabled: false
+  name: ""
+  namespace: ""
+  secretName: ""
+
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+
+  dnsNames: []
 
 env: []
 
