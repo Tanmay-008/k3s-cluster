@@ -5,7 +5,7 @@ k3s-apps-chart:
   replicaCount: 1
 
   image:
-    repository: tanmay678/room-service
+    repository: tanmay678/pgstay
     tag: latest
   
   service:
