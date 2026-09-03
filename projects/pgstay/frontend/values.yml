@@ -1,45 +1,43 @@
-appName: pgstay-frontend
+k3s-apps-chart:
+  appName: pgstay-frontend
 
-replicaCount: 1
+  replicaCount: 1
 
-image:
-  repository: tanmay678/pgstay-frontend
-  tag: latest
-  pullPolicy: IfNotPresent
+  image:
+    repository: tanmay678/pgstay-frontend
+    tag: latest
+    pullPolicy: IfNotPresent
 
-service:
-  type: ClusterIP
-  name: pgstay-frontend-service
-  port: 80
-  targetPort: 3000
+  service:
+    type: ClusterIP
+    name: pgstay-frontend-service
+    port: 80
+    targetPort: 3000
 
-
-ingress:
-  enabled: true
-  className: nginx
-  host: pgstay.tanmayshirbhayye.tech
-  tls:
+  ingress:
     enabled: true
-    secretName: pgstay-tls
-  paths:
-    - path: /
-      pathType: Prefix
-      serviceName: pgstay-frontend-service
-      port: 80
+    className: nginx
+    host: pgstay.tanmayshirbhayye.tech
+    tls:
+      enabled: true
+      secretName: pgstay-tls
+    paths:
+      - path: /
+        pathType: Prefix
+        serviceName: pgstay-frontend-service
+        port: 80
 
+  healthCheck:
+    enabled: false
 
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
 
-healthCheck:
-  enabled: false
-
-resources:
-  limits:
-    cpu: 500m
-    memory: 512Mi
-  requests:
-    cpu: 100m
-    memory: 128Mi
-
-secret:
-  enabled: true
-  secretName: pgstay-frontend-secret
+  secret:
+    enabled: true
+    secretName: pgstay-frontend-secret
