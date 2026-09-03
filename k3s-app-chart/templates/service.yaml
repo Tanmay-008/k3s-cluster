@@ -17,4 +17,4 @@ spec:
       targetPort: {{ .Values.service.targetPort }}
 
   selector:
-    {{- toYaml .Values.service.selector | nindent 4 }}
+    {{- include "k3s-apps.selectorLabels" . | nindent 4 }}
