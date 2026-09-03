@@ -1,12 +1,34 @@
 k3s-apps-chart:
+
   appName: room-service
+
   replicaCount: 1
+
   image:
     repository: tanmay678/room-service
     tag: latest
+  
   service:
+    type: ClusterIP
+    name: roomservice-service
     port: 80
-  targetPort: 5000
+    targetPort: 4000
+
+
+
+  ingress:
+    enabled: true
+    className: nginx
+    host: pgstay.tanmayshirbhayye.tech
+    tls:
+      enabled: true
+      secretName: pgstay-tls
+    paths:
+      - path: /
+        pathType: Prefix
+        serviceName: roomservice-service
+        port: 80
+
 
   healthCheck:
     enabled: false
@@ -19,7 +41,6 @@ k3s-apps-chart:
       cpu: 100m
       memory: 128Mi
 
-  secrets:
+  secret:
     enabled: true
-
-  secretName: roomservice-secret
+    secretName: roomservice-secret
