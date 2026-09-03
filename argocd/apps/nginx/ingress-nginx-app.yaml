@@ -14,9 +14,13 @@ spec:
     helm:
       valuesObject:
         controller:
+          admissionWebhooks:
+            enabled: false
+          hostNetwork: true
+          dnsPolicy: ClusterFirstWithHostNet
           replicaCount: 1
           service:
-            type: LoadBalancer
+            type: ClusterIP
           metrics:
             enabled: true
           config:
