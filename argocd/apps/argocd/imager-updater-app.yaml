@@ -11,7 +11,7 @@ spec:
       chart: argocd-image-updater
       helm:
         valueFiles:
-          - $values/projects/argocd/image-updater-values.yaml
+          - $values/projects/argocd/imager-updater-values.yaml
           
     - repoURL: 'https://github.com/Tanmay-008/k3s-cluster.git'
       targetRevision: main
