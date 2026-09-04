@@ -6,7 +6,7 @@ k3s-apps-chart:
   image:
     repository: tanmay678/pgstay-frontend
     tag: latest
-    pullPolicy: IfNotPresent
+    pullPolicy: Always
 
   service:
     type: ClusterIP
