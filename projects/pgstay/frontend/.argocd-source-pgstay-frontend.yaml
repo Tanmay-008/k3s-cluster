@@ -4,5 +4,5 @@ helm:
     value: tanmay678/pgstay-frontend
     forcestring: true
   - name: k3s-apps-chart.image.tag
-    value: 1.0.14
+    value: 1.0.15
     forcestring: true
