@@ -1,0 +1,12 @@
+config:
+  logLevel: debug 
+  checkInterval: 2m 
+
+resources:
+  limits:
+    cpu: 200m
+    memory: 256Mi
+  requests:
+    cpu: 50m
+    memory: 128Mi
+
