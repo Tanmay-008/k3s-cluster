@@ -4,14 +4,13 @@ metadata:
   name: pgstay-frontend           
   namespace: argocd 
   annotations:
-annotations:
     argocd-image-updater.argoproj.io/image-list: frontend=tanmay678/pgstay-frontend
     argocd-image-updater.argoproj.io/frontend.update-strategy: semver
-    argocd-image-updater.argoproj.io/frontend.allowed-tags: regexp:^1\.0\.[0-9]+$
-    argocd-image-updater.argoproj.io/frontend.helm.image-tag: image.tag
+    argocd-image-updater.argoproj.io/frontend.allowed-tags: "regexp:^1\\.0\\.[0-9]+$"
+    argocd-image-updater.argoproj.io/frontend.helm.image-tag: k3s-apps-chart.image.tag
     argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-creds
     argocd-image-updater.argoproj.io/git-branch: main
-    argocd-image-updater.argoproj.io/write-back-target: values.yml
+    argocd-image-updater.argoproj.io/write-back-target: "helmvalues:values.yml"
 spec:
   project: pgstay   
   source:
