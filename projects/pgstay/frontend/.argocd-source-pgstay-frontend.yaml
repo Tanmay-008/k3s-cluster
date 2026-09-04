@@ -1,8 +1,0 @@
-helm:
-  parameters:
-  - name: image.name
-    value: tanmay678/pgstay-frontend
-    forcestring: true
-  - name: k3s-apps-chart.image.tag
-    value: 1.0.14
-    forcestring: true
