@@ -4,5 +4,5 @@ helm:
     value: tanmay678/pgstay-frontend
     forcestring: true
   - name: image.tag
-    value: c0599d75d8439bf47baa89c6f69b4af99bf64f14
+    value: 1.0.11
     forcestring: true
