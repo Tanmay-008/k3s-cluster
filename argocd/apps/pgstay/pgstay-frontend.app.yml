@@ -4,8 +4,9 @@ metadata:
   name: pgstay-frontend           
   namespace: argocd 
   annotations:
-    argocd-image-updater.argoproj.io/image-list: frontend=tanmay678/pgstay-frontend:latest
-    argocd-image-updater.argoproj.io/frontend.update-strategy: latest 
+    argocd-image-updater.argoproj.io/image-list: frontend=tanmay678/pgstay-frontend
+    argocd-image-updater.argoproj.io/frontend.update-strategy: semver
+    argocd-image-updater.argoproj.io/frontend.allow-tags: regexp:^1\.0\.[0-9]+$
     argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-creds
     argocd-image-updater.argoproj.io/git-branch: main
     argocd-image-updater.argoproj.io/write-back-target: values.yml           
