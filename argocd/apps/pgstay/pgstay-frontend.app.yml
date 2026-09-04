@@ -11,14 +11,14 @@ metadata:
     argocd-image-updater.argoproj.io/write-back-target: values.yml           
 spec:
   project: pgstay   
-  sources:
-   - repoURL: https://github.com/Tanmay-008/k3s-cluster.git
-     targetRevision: main
-     path: projects/pgstay/frontend
-     helm:
-       valueFiles:
-         - values.yml
-         - secrets://pgstay-frontend-secret-encrypted.yml
+  source:
+    repoURL: https://github.com/Tanmay-008/k3s-cluster.git
+    targetRevision: main
+    path: projects/pgstay/frontend
+    helm:
+      valueFiles:
+        - values.yml
+        - secrets://pgstay-frontend-secret-encrypted.yml
   destination:
     server: https://kubernetes.default.svc 
     namespace: pgstay             
