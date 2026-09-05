@@ -24,7 +24,7 @@ k3s-apps-chart:
       enabled: true
       secretName: pgstay-tls
     paths:
-      - path: /
+      - path: /api/v1/user
         pathType: Prefix
         serviceName: userservice-service
         port: 80
