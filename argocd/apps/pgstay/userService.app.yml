@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1   
+kind: Application                 
+metadata:
+  name: user-service           
+  namespace: argocd 
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: user-service=tanmay678/pgstay-user-service
+    argocd-image-updater.argoproj.io/user-service.update-strategy: semver
+    argocd-image-updater.argoproj.io/user-service.allowed-tags: "regexp:^1\\.0\\.[0-9]+$"
+    argocd-image-updater.argoproj.io/user-service.helm.image-tag: k3s-apps-chart.image.tag
+    argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-creds
+    argocd-image-updater.argoproj.io/git-branch: main
+    argocd-image-updater.argoproj.io/write-back-target: "helmvalues:values.yml"
+spec:
+  project: pgstay   
+  source:
+    repoURL: https://github.com/Tanmay-008/k3s-cluster.git
+    targetRevision: main
+    path: projects/pgstay/user-service
+    helm:
+      valueFiles:
+        - values.yaml
+        - secrets://user-service-encrypt-secret.yaml
+  destination:
+    server: https://kubernetes.default.svc 
+    namespace: pgstay             
+  syncPolicy:                      
+    automated:                     
+      prune: true                  
+      selfHeal: true  
+    syncOptions: 
+      - ApplyOutOfSyncOnly=true 
+      - CreateNamespace=true
