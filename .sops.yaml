@@ -1,6 +1,6 @@
 creation_rules:
-  - path_regex: .*-secret.*\.yml$
-    encrypted_regex: '^(data|stringData)$'
+  - path_regex: .*-secret.*\.(yaml|yml)$
+    encrypted_regex: '^(data|stringData|appSecrets)$'
     age: 'age1f8n32ugy56xu6gjwzcxq809sq5x8gdnf56nas8ral33eg956we0smjq47u'
 
   - path_regex: \.sops\.yaml$
