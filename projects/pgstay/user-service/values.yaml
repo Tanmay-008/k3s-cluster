@@ -1,0 +1,46 @@
+k3s-apps-chart:
+
+  appName: user-service
+
+  replicaCount: 1
+
+  image:
+    repository: tanmay678/pgstay-user-service
+    tag: 1.0.2
+  
+  service:
+    type: ClusterIP
+    name: userservice-service
+    port: 80
+    targetPort: 4000
+
+
+
+  ingress:
+    enabled: true
+    className: nginx
+    host: pgstay.tanmayshirbhayye.tech
+    tls:
+      enabled: true
+      secretName: pgstay-tls
+    paths:
+      - path: /
+        pathType: Prefix
+        serviceName: userservice-service
+        port: 80
+
+
+  healthCheck:
+    enabled: false
+
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+
+  secret:
+    enabled: true
+    secretName: userservice-secret
