@@ -4,13 +4,22 @@ image:
   repository: otel/opentelemetry-collector-k8s
 
 config:
+  receivers:
+    otlp:
+      protocols:
+        grpc:
+          endpoint: 0.0.0.0:4317
+        http:
+          endpoint: 0.0.0.0:4318
+
   exporters:
     debug: {}
 
   service:
     pipelines:
       logs:
-        receivers: []
+        receivers:
+          - otlp
         processors: []
         exporters:
           - debug
