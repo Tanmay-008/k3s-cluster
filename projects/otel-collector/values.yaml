@@ -1,0 +1,16 @@
+mode: daemonset
+
+image:
+  repository: otel/opentelemetry-collector-k8s
+
+config:
+  exporters:
+    debug: {}
+
+  service:
+    pipelines:
+      logs:
+        receivers: []
+        processors: []
+        exporters:
+          - debug
