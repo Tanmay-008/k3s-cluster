@@ -6,19 +6,13 @@ metadata:
 spec:
   project: default
 
-  source:
-    repoURL: https://open-telemetry.github.io/opentelemetry-helm-charts
-    chart: opentelemetry-collector
-    targetRevision: 0.172.1
-
-    helm:
-      valueFiles:
-        - $values/projects/otel-collector/values.yaml
-
   sources:
     - repoURL: https://open-telemetry.github.io/opentelemetry-helm-charts
       chart: opentelemetry-collector
       targetRevision: 0.172.1
+      helm:
+        valueFiles:
+          - $values/projects/otel-collector/values.yaml
 
     - repoURL: https://github.com/Tanmay-008/k3s-cluster.git
       targetRevision: main
