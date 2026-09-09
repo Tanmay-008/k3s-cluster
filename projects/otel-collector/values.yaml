@@ -4,7 +4,9 @@ image:
   repository: otel/opentelemetry-collector-k8s
 
 config:
+
   receivers:
+
     otlp:
       protocols:
         grpc:
@@ -12,14 +14,34 @@ config:
         http:
           endpoint: 0.0.0.0:4318
 
+    filelog:
+      include_file_path: true
+      include:
+        - /var/log/pods/*/*/*.log
+
+      operators:
+        - id: container-parser
+          type: container
+
+    k8sobjects:
+      objects:
+        - name: events
+          mode: watch
+
   exporters:
     debug: {}
 
   service:
+
     pipelines:
+
       logs:
         receivers:
           - otlp
+          - filelog
+          - k8sobjects
+
         processors: []
+
         exporters:
           - debug
