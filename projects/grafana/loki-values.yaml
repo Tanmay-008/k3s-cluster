@@ -3,6 +3,10 @@ deploymentMode: Monolithic
 singleBinary:
   replicas: 1
 
+chunksCache:
+  enabled: true
+  allocatedMemory: 128
+
 loki:
   commonConfig:
     replication_factor: 1
@@ -47,9 +51,6 @@ loki:
     volume_enabled: true
     retention_period: 240h
  
-  chunks_cache:
-    enabled: true
-    allocatedMemory: 128
     
   storage:
     type: s3
@@ -72,7 +73,6 @@ loki:
 minio:
   enabled: false
 
-# Disable other deployment modes
 backend:
   replicas: 0
 
