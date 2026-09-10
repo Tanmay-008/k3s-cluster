@@ -3,10 +3,8 @@ kind: Application
 metadata:
   name: loki
   namespace: argocd
-
 spec:
   project: default
-
   sources:
     - repoURL: 'https://grafana-community.github.io/helm-charts'
       chart: loki
@@ -14,21 +12,18 @@ spec:
       helm:
         valueFiles:
           - $values/projects/grafana/loki-values.yaml
-          - secrets://grafana-secrets-encrypt.yaml
+          - secrets://$values/projects/grafana/grafana-secrets-encrypt.yaml
           
     - repoURL: 'https://github.com/Tanmay-008/k3s-cluster.git'
       targetRevision: main
       ref: values
-
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: grafana
-
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
-
     syncOptions:
       - ApplyOutOfSyncOnly=true
       - CreateNamespace=true
