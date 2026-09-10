@@ -49,7 +49,7 @@ loki:
  
   chunks_cache:
     enabled: true
-    allocatedMemory: 256
+    allocatedMemory: 128
     
   storage:
     type: s3
