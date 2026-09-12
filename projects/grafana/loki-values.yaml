@@ -7,6 +7,9 @@ chunksCache:
   enabled: true
   allocatedMemory: 128
 
+gateway:
+  enabled: false
+
 loki:
   commonConfig:
     replication_factor: 1
