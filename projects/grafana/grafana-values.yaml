@@ -106,15 +106,12 @@ livenessProbe:
 # schedulerName: "default-scheduler"
 
 image:
-  # -- The Docker registry
   registry: docker.io
-  # -- Docker image repository
   repository: grafana/grafana
-  # Overrides the Grafana image tag whose default is the chart appVersion
-  tag: "{{ .Chart.AppVersion }}-distroless"
+  tag: "" 
   sha: ""
   pullPolicy: IfNotPresent
-
+  
   ## Optionally specify an array of imagePullSecrets.
   ## Secrets must be manually created in the namespace.
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
@@ -855,7 +852,7 @@ dashboardProviders:
         editable: true
         options:
           path: /var/lib/grafana/dashboards/k3s-observability
-          
+
 defaultCurlOptions: "-skf"
 
 defaultShellOptions: "eufo pipefail"
