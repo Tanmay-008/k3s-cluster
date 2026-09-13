@@ -843,19 +843,19 @@ notifiers: {}
 #        addresses: an_email_address@example.com
 #    delete_notifiers:
 
-dashboardProviders: {}
+dashboardProviders:
   dashboardproviders.yaml:
     apiVersion: 1
     providers:
-    - name: 'k3s-observability'
-      orgId: 1
-      folder: 'K3s-Observability'
-      type: file
-      disableDeletion: false
-      editable: true
-      options:
-        path: /var/lib/grafana/dashboards/k3s-observability
-
+      - name: 'k3s-observability'
+        orgId: 1
+        folder: 'K3s-Observability'
+        type: file
+        disableDeletion: false
+        editable: true
+        options:
+          path: /var/lib/grafana/dashboards/k3s-observability
+          
 defaultCurlOptions: "-skf"
 
 defaultShellOptions: "eufo pipefail"
@@ -866,7 +866,7 @@ dashboards:
       gnetId: 13639
       revision: 2
       datasource: Loki
-      
+
 ## Reference to external ConfigMap per provider. Use provider name as key and ConfigMap name as value.
 ## A provider dashboards must be defined either by external ConfigMaps or in values.yaml, not in both.
 ## ConfigMap data example:

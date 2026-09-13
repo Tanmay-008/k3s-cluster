@@ -12,6 +12,7 @@ spec:
       helm:
         valueFiles:
           - $values/projects/grafana/grafana-values.yaml
+          
     - repoURL: 'https://github.com/Tanmay-008/k3s-cluster.git'
       targetRevision: main
       ref: values
