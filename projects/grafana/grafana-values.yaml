@@ -111,7 +111,7 @@ image:
   tag: "" 
   sha: ""
   pullPolicy: IfNotPresent
-  
+
   ## Optionally specify an array of imagePullSecrets.
   ## Secrets must be manually created in the namespace.
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
@@ -295,38 +295,21 @@ extraExposePorts: []
 
 # overrides pod.spec.hostAliases in the grafana deployment's pods
 hostAliases: []
-  # - ip: "1.2.3.4"
-  #   hostnames:
-  #     - "my.host.com"
 
 ingress:
-  enabled: false
-  # ingressClassName: nginx
-  # Values can be templated
-  annotations: {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
-  labels: {}
+  enabled: true
+  ingressClassName: nginx
+  annotations:
+    kubernetes.io/ingress.class: nginx
   path: /
   pathType: Prefix
-
   hosts:
-    - chart-example.local
-  ## Extra paths to prepend to every host configuration. This is useful when working with annotation based services.
-  extraPaths: []
-  # - path: /*
-  #   pathType: Prefix
-  #   backend:
-  #     service:
-  #       name: ssl-redirect
-  #       port:
-  #         name: use-annotation
+    - grafana.tanmayshirbhayye.tech
+  tls:
+    - secretName: grafana-tls
+      hosts:
+        - grafana.tanmayshirbhayye.tech
 
-
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
 
 # -- BETA: Configure the gateway routes for the chart here.
 # More routes can be added by adding a dictionary key like the 'main' route.
