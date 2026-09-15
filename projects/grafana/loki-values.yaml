@@ -22,12 +22,12 @@ loki:
       - name: AWS_ACCESS_KEY_ID
         valueFrom:
           secretKeyRef:
-            name: grafana-secrets
+            name: loki-secrets
             key: AWS_ACCESS_KEY_ID
       - name: AWS_SECRET_ACCESS_KEY
         valueFrom:
           secretKeyRef:
-            name: grafana-secrets
+            name: loki-secrets
             key: AWS_SECRET_ACCESS_KEY
 
   schemaConfig:
