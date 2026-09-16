@@ -6,7 +6,6 @@ image:
 config:
 
   receivers:
-
     otlp:
       protocols:
         grpc:
@@ -18,7 +17,6 @@ config:
       include_file_path: true
       include:
         - /var/log/pods/*/*/*.log
-
       operators:
         - id: container-parser
           type: container
@@ -38,17 +36,27 @@ config:
           - k8s.container.name
           - k8s.deployment.name
 
+  exporters:
+    debug:
+      verbosity: detailed
+    loki:
+      endpoint: "http://loki.grafana.svc.cluster.local:3100/loki/api/v1/push"
+      
+      default_labels_enabled:
+        exporter: true
+        job: true
+
   service:
-
     pipelines:
-
       logs:
         receivers:
           - otlp
           - filelog
           - k8sobjects
 
-        processors: []
+        processors: 
+          - k8sattributes
 
         exporters:
           - debug
+          - loki
