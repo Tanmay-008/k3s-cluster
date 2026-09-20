@@ -701,8 +701,7 @@ datasources:
     datasources:
       - name: Loki
         type: loki
-        url: http://loki.grafana.svc.cluster.local:3100 # Verify karein ki Loki 'grafana' namespace me hi deployed hai
-        access: proxy
+        url: http://loki.observability.svc.cluster.local:3100 
         isDefault: true
         jsonData:
           maxLines: 1000
