@@ -1,36 +1,30 @@
-deploymentMode: Monolithic
+deploymentMode: SingleBinary
 
+# 1. Kubernetes Pod configuration goes at the ROOT level
 singleBinary:
   replicas: 1
+  extraArgs:
+    - "-config.expand-env=true"
+  extraEnv: # 2. Use extraEnv instead of env
+    - name: AWS_ACCESS_KEY_ID
+      valueFrom:
+        secretKeyRef:
+          name: loki-secrets
+          key: AWS_ACCESS_KEY_ID
+    - name: AWS_SECRET_ACCESS_KEY
+      valueFrom:
+        secretKeyRef:
+          name: loki-secrets
+          key: AWS_SECRET_ACCESS_KEY
 
-chunksCache:
-  enabled: true
-  allocatedMemory: 128
-
-gateway:
-  enabled: false
-
+# 3. Loki Application configuration
 loki:
   auth_enabled: false
   
   commonConfig:
     replication_factor: 1
   
-  singleBinary:
-    replicas: 1
-    extraArgs:
-      - "-config.expand-env=true"
-    env:
-      - name: AWS_ACCESS_KEY_ID
-        valueFrom:
-          secretKeyRef:
-            name: loki-secrets
-            key: AWS_ACCESS_KEY_ID
-      - name: AWS_SECRET_ACCESS_KEY
-        valueFrom:
-          secretKeyRef:
-            name: loki-secrets
-            key: AWS_SECRET_ACCESS_KEY
+  # REMOVED the nested singleBinary block from here
 
   schemaConfig:
     configs:
@@ -56,15 +50,12 @@ loki:
     volume_enabled: true
     retention_period: 240h
  
-    
   storage:
     type: s3
-
     bucketNames:
       chunks: pgstay-logs-chunks
       ruler: pgstay-logs-ruler
       admin: pgstay-logs-admin
-
     s3:
       endpoint: https://s3.eu-north-1.amazonaws.com
       region: eu-north-1
@@ -75,44 +66,40 @@ loki:
       insecure: false
       http_config: {}
 
+chunksCache:
+  enabled: true
+  allocatedMemory: 128
+
+gateway:
+  enabled: false
+
 minio:
   enabled: false
 
+# Rest of your component replicas remain 0
 backend:
   replicas: 0
-
 read:
   replicas: 0
-
 write:
   replicas: 0
-
 ingester:
   replicas: 0
-
 querier:
   replicas: 0
-
 queryFrontend:
   replicas: 0
-
 queryScheduler:
   replicas: 0
-
 distributor:
   replicas: 0
-
 compactor:
   replicas: 0
-
 indexGateway:
   replicas: 0
-
 bloomPlanner:
   replicas: 0
-
 bloomBuilder:
   replicas: 0
-
 bloomGateway:
   replicas: 0
