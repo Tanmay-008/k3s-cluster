@@ -23,9 +23,9 @@ rbac:
   # useExistingClusterRole: name-of-some-clusterRole
   pspEnabled: false
   pspUseAppArmor: false
-  namespaced: false
+  namespaced: true
   # Only has an effect if namespaced: true is set
-  namespaces: []
+  namespaces: observability
   extraRoleRules: []
   # - apiGroups: []
   #   resources: []
