@@ -43,7 +43,7 @@ config:
 
   exporters:
     otlphttp:
-      endpoint: "http://loki.grafana.svc.cluster.local:3100/otlp"
+      endpoint: "http://loki.observability.svc.cluster.local:3100/otlp"
       tls:
         insecure: true
 
