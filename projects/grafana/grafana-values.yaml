@@ -836,12 +836,12 @@ defaultCurlOptions: "-skf"
 
 defaultShellOptions: "eufo pipefail"
 
-dashboards:
-  k3s-observability:
-    loki-logs-search:
-      gnetId: 13639
-      revision: 2
-      datasource: Loki
+# dashboards:
+#   k3s-observability:
+#     loki-logs-search:
+#       gnetId: 13639
+#       revision: 2
+#       datasource: Loki
 
 ## Reference to external ConfigMap per provider. Use provider name as key and ConfigMap name as value.
 ## A provider dashboards must be defined either by external ConfigMaps or in values.yaml, not in both.
