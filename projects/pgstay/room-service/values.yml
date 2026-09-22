@@ -6,7 +6,7 @@ k3s-apps-chart:
 
   image:
     repository: tanmay678/room-service
-    tag: 1.0.12
+    tag: 1.0.0
   
   service:
     type: ClusterIP
