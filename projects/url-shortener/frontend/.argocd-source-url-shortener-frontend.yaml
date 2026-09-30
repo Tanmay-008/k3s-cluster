@@ -4,5 +4,5 @@ helm:
     value: tanmay678/url-shortener-frontend
     forcestring: true
   - name: k3s-apps-chart.image.tag
-    value: 1.0.4
+    value: 1.0.5
     forcestring: true
