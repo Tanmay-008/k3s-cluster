@@ -1,0 +1,46 @@
+k3s-apps-chart:
+
+  appName: frontend
+
+  replicaCount: 1
+
+  image:
+    repository: tanmay678/url-shortener-frontend
+    tag: 1.0.2
+  
+  service:
+    type: ClusterIP
+    name: url-shortener-frontend-service
+    port: 80
+    targetPort: 3000
+
+
+
+  ingress:
+    enabled: true
+    className: nginx
+    host: url-shortener.tanmayshirbhayye.tech
+    tls:
+      enabled: true
+      secretName: url-shortener-tls
+    paths:
+      - path: /
+        pathType: Prefix
+        serviceName: url-shortener-frontend-service
+        port: 80
+
+
+  healthCheck:
+    enabled: false
+
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+
+  secret:
+    enabled: true
+    secretName: frontend-secret
