@@ -19,7 +19,7 @@ k3s-apps-chart:
   ingress:
     enabled: true
     className: nginx
-    host: url-shortener.tanmayshirbhayye.tech
+    host: api-url-shortener.tanmayshirbhayye.tech
     tls:
       enabled: true
       secretName: url-shortener-tls
