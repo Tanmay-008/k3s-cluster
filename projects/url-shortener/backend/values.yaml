@@ -22,7 +22,7 @@ k3s-apps-chart:
     host: api-url-shortener.tanmayshirbhayye.tech
     tls:
       enabled: true
-      secretName: url-shortener-tls
+      secretName: backend-url-shortener-tls
     paths:
       - path: /
         pathType: Prefix
