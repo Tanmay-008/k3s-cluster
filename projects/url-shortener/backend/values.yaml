@@ -12,7 +12,7 @@ k3s-apps-chart:
     type: ClusterIP
     name: url-shortener-backend-service
     port: 80
-    targetPort: 3000
+    targetPort: 4000
 
 
 
