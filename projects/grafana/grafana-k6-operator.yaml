@@ -1,0 +1,19 @@
+# k6-values.yaml
+
+manager:
+  replicas: 1
+  
+  logging:
+    development: false
+    
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "100Mi"
+    limits:
+      cpu: "300m"
+      memory: "256Mi"
+
+metrics:
+  serviceMonitor:
+    enabled: false
