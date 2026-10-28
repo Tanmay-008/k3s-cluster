@@ -1,21 +1,14 @@
 k3s-apps-chart:
-
   appName: backend
-
   replicaCount: 1
-
   image:
     repository: tanmay678/url-shortener-backend
-    tag: 1.0.2
-  
+    tag: 1.0.7
   service:
     type: ClusterIP
     name: url-shortener-backend-service
     port: 80
     targetPort: 4000
-
-
-
   ingress:
     enabled: true
     className: nginx
@@ -24,15 +17,12 @@ k3s-apps-chart:
       enabled: true
       secretName: backend-url-shortener-tls
     paths:
-      - path: /
-        pathType: Prefix
-        serviceName: url-shortener-backend-service
-        port: 80
-
-
+    - path: /
+      pathType: Prefix
+      serviceName: url-shortener-backend-service
+      port: 80
   healthCheck:
     enabled: false
-
   resources:
     limits:
       cpu: 500m
@@ -40,7 +30,8 @@ k3s-apps-chart:
     requests:
       cpu: 100m
       memory: 128Mi
-
   secret:
     enabled: true
     secretName: backend-secret
+image:
+  name: tanmay678/url-shortener-backend
