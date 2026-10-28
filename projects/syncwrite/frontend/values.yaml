@@ -1,21 +1,14 @@
 k3s-apps-chart:
-
   appName: frontend
-
   replicaCount: 1
-
   image:
     repository: tanmay678/syncwrite-frontend
-    tag: 1.0.8
-  
+    tag: 1.0.9
   service:
     type: ClusterIP
     name: syncwrite-frontend-service
     port: 80
     targetPort: 3000
-
-
-
   ingress:
     enabled: true
     className: nginx
@@ -24,15 +17,12 @@ k3s-apps-chart:
       enabled: true
       secretName: syncwrite-tls
     paths:
-      - path: /
-        pathType: Prefix
-        serviceName: syncwrite-frontend-service
-        port: 80
-
-
+    - path: /
+      pathType: Prefix
+      serviceName: syncwrite-frontend-service
+      port: 80
   healthCheck:
     enabled: false
-
   resources:
     limits:
       cpu: 500m
@@ -40,4 +30,5 @@ k3s-apps-chart:
     requests:
       cpu: 100m
       memory: 128Mi
-
+image:
+  name: tanmay678/syncwrite-frontend
