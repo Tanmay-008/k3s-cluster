@@ -3,7 +3,7 @@ k3s-apps-chart:
   replicaCount: 1
   image:
     repository: tanmay678/syncwrite-frontend
-    tag: 1.0.9
+    tag: 1.0.19
   service:
     type: ClusterIP
     name: syncwrite-frontend-service
