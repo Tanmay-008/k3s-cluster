@@ -3,7 +3,7 @@ k3s-apps-chart:
   replicaCount: 1
   image:
     repository: tanmay678/url-shortener-backend
-    tag: 1.0.8
+    tag: 1.0.9
   service:
     type: ClusterIP
     name: url-shortener-backend-service
